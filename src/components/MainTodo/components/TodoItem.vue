@@ -2,7 +2,7 @@
   <div class="todo-item">
     <input type="checkbox" name="" id="" />
     <label for="">todo1</label>
-    <button>X</button>
+    <button></button>
   </div>
 </template>
 
@@ -13,17 +13,31 @@
 </script>
 
 <style lang="stylus" scoped>
+  @import '~styles/theme.styl'
+  @import '~styles/mixins.styl'
+
   .todo-item
     display: flex
     justify-content: space-between
     padding: 10px
+    font-size: 24px
+
+    &:hover
+      button:after
+        content: 'X'
+        font-size: 24px
+        color: $lightred
+
+    &.completed
+      label
+        color: #d9d9d9
+        text-decoration: line-through
 
     input
       width: 50px
       height: 30px
-      appearance: none
-      border: none
-      outline: none
+      text-align: center
+      cleanDefaultStyle()
 
       &:after
         content: url('~images/unchecked.svg')
@@ -33,4 +47,11 @@
 
     label
       flex: 1
+      transition: color 0.4s
+
+    button
+      width: 40px
+      cleanDefaultStyle()
+      background-color: transparent
+      cursor: pointer
 </style>
