@@ -1,7 +1,7 @@
 <template>
   <div class="todo-item">
     <input type="checkbox" name="" id="" />
-    <label for="">todo1</label>
+    <label for="">{{ todoItem.content }}</label>
     <button></button>
   </div>
 </template>
@@ -9,6 +9,9 @@
 <script>
   export default {
     name: "TodoItem",
+    props: {
+      todoItem: Object,
+    },
   };
 </script>
 
@@ -21,6 +24,7 @@
     justify-content: space-between
     padding: 10px
     font-size: 24px
+    border-top: 1px solid rgba(0, 0, 0, 0.1)
 
     &:hover
       button:after
