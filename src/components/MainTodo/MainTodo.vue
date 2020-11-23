@@ -12,18 +12,23 @@
       v-for="(item, index) in todoData"
       :key="index"
       :todoItem="item"
+      @onDeleteItem="deleteTodo"
     ></todo-item>
+    <todo-info :total="total"></todo-info>
   </div>
 </template>
 
 <script>
   import TodoItem from "./components/TodoItem.vue";
+  import TodoInfo from "./components/TodoInfo.vue";
+
   export default {
     name: "MainTodo",
     data() {
       return {
         todoData: [],
         content: "",
+        total: 0,
       };
     },
     methods: {
@@ -38,9 +43,28 @@
 
         this.content = "";
       },
+      deleteTodo(item) {
+        if (!item) return;
+
+        this.todoData.splice(
+          this.todoData.findIndex((i) => i.id === item.id),
+          1
+        );
+      },
+    },
+    watch: {
+      todoData: {
+        deep: true,
+        handler() {
+          this.total = this.todoData.filter(
+            (todo) => todo.completed === false
+          ).length;
+        },
+      },
     },
     components: {
       TodoItem,
+      TodoInfo,
     },
   };
 </script>

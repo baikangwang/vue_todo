@@ -1,8 +1,8 @@
 <template>
-  <div class="todo-item">
-    <input type="checkbox" name="" id="" />
+  <div :class="['todo-item', todoItem.completed ? 'completed' : '']">
+    <input type="checkbox" name="" id="" v-model="todoItem.completed" />
     <label for="">{{ todoItem.content }}</label>
-    <button></button>
+    <button @click="deleteItem"></button>
   </div>
 </template>
 
@@ -11,6 +11,11 @@
     name: "TodoItem",
     props: {
       todoItem: Object,
+    },
+    methods: {
+      deleteItem() {
+        this.$emit("onDeleteItem", this.todoItem);
+      },
     },
   };
 </script>
